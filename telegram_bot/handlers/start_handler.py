@@ -13,7 +13,7 @@ class StartCommandStrategy(CommandStrategy):
         user_id = user.id
         username = user.username if user.username else 'no username'
         first_name = user.first_name if user.first_name else 'no firstname'
-        last_name = user.last_name
+        last_name = user.last_name if user.last_name else 'mp lastname'
         registered_user = self.db_manager.get_user_by_id(user_id)
         keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
         keyboard.add(KeyboardButton('/history'))

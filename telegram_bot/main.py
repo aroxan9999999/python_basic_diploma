@@ -53,6 +53,31 @@ async def get_product(message: Message, state: FSMContext):
     await state.update_data(product=product)  # Сохраняем введенный продукт
 
 
+from aiogram import types
+from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters import Command
+
+
+# ...
+
+@dp.message_handler(Command("start"))
+async def start_search(message: types.Message):
+    await message.answer("Давайте начнем поиск товаров! Введите ключевые слова для поиска.")
+
+
+@dp.message_handler(Command("help"))
+async def show_help(message: types.Message):
+    help_text = (
+        "Привет! Я бот для поиска товаров на AliExpress. Вот список доступных команд:\n"
+        "/start - Начать новый поиск\n"
+        "/help - Вывести эту справку\n"
+        "/high - Показать товары с высокой ценой\n"
+        "/low - Показать товары с низкой ценой\n"
+        "/custom - Настроить параметры поиска\n"
+    )
+    await message.answer(help_text)
+
+
 @dp.message_handler(lambda message: message.text.isdigit(), state=UserState.waiting_for_quantity)
 async def get_count(message: Message, state: FSMContext):
     count = int(message.text)
@@ -117,7 +142,7 @@ async def send_search_results_message(search_result, message):
                 image_url = "http:" + image_url
             print(item_url)
             caption = f"<a href='{item_url}'>{title}</a>\nPrice: {promotion_price} {currency}"
-            photo = await bot.send_photo(message.chat.id, photo=image_url, caption=caption, parse_mode='HTML',)
+            photo = await bot.send_photo(message.chat.id, photo=image_url, caption=caption, parse_mode='HTML', )
             db.add_search_result(message.from_user.id, title, price, promotion_price, item_url, image=image_url)
 
         else:
@@ -182,7 +207,6 @@ async def history_command(message: types.Message, state: FSMContext):
     else:
         await message.answer("No search history found for your user.")
     await state.finish()
-
 
 
 if __name__ == '__main__':
