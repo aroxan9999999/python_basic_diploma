@@ -57,12 +57,13 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
 
-
 # ...
 
 @dp.message_handler(Command("start"))
 async def start_search(message: types.Message):
     await message.answer("Давайте начнем поиск товаров! Введите ключевые слова для поиска.")
+
+
 @dp.message_handler(Command("help"))
 async def show_help(message: types.Message):
     help_text = (
