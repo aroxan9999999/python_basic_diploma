@@ -15,10 +15,11 @@ from states.user_states import UserState
 from aiogram.types import Message, KeyboardButton, ReplyKeyboardMarkup
 from aiogram import executor
 from database.db_manager import db_manager
+import loader
 
-API_TOKEN = '6393996954:AAHUSu0buDwhLHGDOA6MHAz99HL6pY9ogL8'
+API_TOKEN = loader.BOT_TOKEN
 logging.basicConfig(level=logging.INFO)
-bot = Bot(token=API_TOKEN)
+bot = Bot(token= API_TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 start_strategy = StartCommandStrategy(db_manager)
@@ -56,6 +57,7 @@ async def get_product(message: Message, state: FSMContext):
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
+
 
 # ...
 

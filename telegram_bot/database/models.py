@@ -2,7 +2,9 @@ from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Float
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
-
+import loader
+username = loader.username
+password=loader.password
 Base = declarative_base()
 
 
@@ -32,7 +34,7 @@ class Search(Base):
 
 
 # Создание базы данных и таблиц
-engine = create_engine('mysql+mysqlconnector://root:ARO9510999@localhost/mydatabase')
+engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@localhost/mydatabase')
 Session = sessionmaker(bind=engine)
 session = Session()
 

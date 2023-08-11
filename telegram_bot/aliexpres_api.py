@@ -1,8 +1,8 @@
 import json
-
 import requests
+import loader
 
-ALIEXPRESS_API_KEY = '5b3ba6c59dmsh556e43cd7c89d0fp19119djsn245bd5659280'
+ALIEXPRESS_API_KEY = loader.ALIEXPRESS_API_KEY
 
 
 class AliExpressAPI:
